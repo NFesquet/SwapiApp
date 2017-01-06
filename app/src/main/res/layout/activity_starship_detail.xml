@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/activity_starship_detail"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nicolasfesquet.trainline_test_technique.activity.StarshipDetailActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <FrameLayout
+            android:id="@+id/starship_detail_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="gone">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/starship_detail_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/starship_detail_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/credit"
+                android:drawableRight="@drawable/credit"
+                android:gravity="center_vertical"
+                android:layout_gravity="end"
+                android:textSize="20sp"
+                tools:text="1000000"/>
+
+            <TextView
+                android:id="@+id/starship_detail_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/StarshipDetailTextViewStyle"
+                tools:text="Starship Detail Model"/>
+
+            <TextView
+                android:id="@+id/starship_detail_manufacturer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/StarshipDetailTextViewStyle"
+                tools:text="Starship Detail Manufacturer"/>
+
+            <TextView
+                android:id="@+id/starship_detail_max_speed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/StarshipDetailTextViewStyle"
+                tools:text="5210"/>
+
+            <TextView
+                android:id="@+id/starship_detail_crew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/StarshipDetailTextViewStyle"
+                tools:text="Crew: 32"/>
+
+            <TextView
+                android:id="@+id/starship_detail_passengers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/StarshipDetailTextViewStyle"
+                tools:text="Passengers: 600"/>
+
+            <TextView
+                android:id="@+id/starship_detail_mglt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/StarshipDetailTextViewStyle"
+                tools:text="42"/>
+
+            <TextView
+                android:id="@+id/starship_detail_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/StarshipDetailTextViewStyle"
+                tools:text="Starship Detail Class"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/starship_detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
+
+</android.support.design.widget.CoordinatorLayout>
