@@ -1,6 +1,7 @@
 package com.nfesquet.swapiapp.service;
 
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,6 +16,7 @@ public class ApiClient {
     public static Retrofit getClient() {
         if (retrofit == null) {
             Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .create();
 
             retrofit = new Retrofit.Builder()

@@ -1,41 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/activity_main"
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.nicolasfesquet.trainline_test_technique.activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <FrameLayout
+    <include
+        layout="@layout/content_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"/>
 
-        <ProgressBar
-            android:id="@+id/main_layout_progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_gravity="center"/>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/activity_main_drawer"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_layout_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:visibility="gone"/>
-
-    </FrameLayout>
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/main_layout_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
-
-</android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.DrawerLayout>

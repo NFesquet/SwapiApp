@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">Star Wars Spaceship loader</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="load_next">Load next spaceships</string>
     <string name="loading_error">Could not retrieve spaceships</string>
     <string name="starship_detail_format_model">Model: %1$s</string>
