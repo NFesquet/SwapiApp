@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_spaceships"
+            android:title="Spaceships"/>
+        <item
+            android:id="@+id/nav_planets"
+            android:title="Planets"/>
+        <item
+            android:id="@+id/nav_vehicles"
+            android:title="Vehicles"/>
+        <item
+            android:id="@+id/nav_people"
+            android:title="People"/>
+        <item
+            android:id="@+id/nav_films"
+            android:title="Films"/>
+        <item
+            android:id="@+id/nav_species"
+            android:title="Species"/>
+    </group>
+
+</menu>

@@ -13,23 +13,16 @@ import com.nfesquet.swapiapp.model.Starship;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.subjects.PublishSubject;
-
-public class StarshipsAdapter extends RecyclerView.Adapter<StarshipsAdapter.ViewHolder> {
+public class StarshipsAdapter extends IItemAdapter<Starship> {
 
     private static final int ITEM_TYPE = 0;
     private static final int BUTTON_TYPE = 1;
 
     private final List<Starship> mStarshipList;
-    private boolean mHasNextPage = true;
-
-    private final PublishSubject<String> onClickItem = PublishSubject.create();
-    private final View.OnClickListener mLoadNextListener;
 
     public StarshipsAdapter(View.OnClickListener loadNextListener) {
+        super(loadNextListener);
         mStarshipList = new ArrayList<>();
-        mLoadNextListener = loadNextListener;
     }
 
     @Override
@@ -61,17 +54,10 @@ public class StarshipsAdapter extends RecyclerView.Adapter<StarshipsAdapter.View
         return position == mStarshipList.size() ? BUTTON_TYPE : ITEM_TYPE;
     }
 
+    @Override
     public void addItems(List<Starship> starshipList) {
         mStarshipList.addAll(starshipList);
         notifyDataSetChanged();
-    }
-
-    public void setHasNextPage(boolean hasNextPage) {
-        mHasNextPage = hasNextPage;
-    }
-
-    public Observable<String> getItemClicks() {
-        return onClickItem.asObservable();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
