@@ -1,6 +1,6 @@
 package com.nfesquet.swapiapp.model;
 
-public class Starship {
+public class Starship implements SwapiModel {
 
     private String name;
     private String model;

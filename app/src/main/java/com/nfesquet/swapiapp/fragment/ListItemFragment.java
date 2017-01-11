@@ -16,9 +16,9 @@ import android.widget.Toast;
 import com.nfesquet.swapiapp.R;
 import com.nfesquet.swapiapp.activity.StarshipDetailActivity;
 import com.nfesquet.swapiapp.adapter.IItemAdapter;
-import com.nfesquet.swapiapp.adapter.StarshipsAdapter;
+import com.nfesquet.swapiapp.adapter.ItemViewModel;
 import com.nfesquet.swapiapp.model.ApiResult;
-import com.nfesquet.swapiapp.model.Starship;
+import com.nfesquet.swapiapp.model.SwapiModel;
 import com.nfesquet.swapiapp.service.ApiClient;
 import com.nfesquet.swapiapp.service.SwapiService;
 
@@ -26,15 +26,33 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListItemFragment<T, U extends IItemAdapter<T>> extends Fragment {
+public class ListItemFragment<U extends ItemViewModel> extends Fragment {
 
-    private SwapiService mService;
+    private static final String ITEM_VM_KEY = "itemVmKey";
+    private static SwapiService mService;
 
     private RecyclerView mListView;
-    private U mAdapter;
+    private IItemAdapter<U> mAdapter;
     private ProgressBar mProgressBar;
+    private ItemViewModel mItemViewModel;
 
     private String nextPage;
+
+    public static ListItemFragment newInstance(ItemViewModel itemVm) {
+
+        Bundle args = new Bundle();
+        args.putParcelable(ITEM_VM_KEY, itemVm);
+
+        ListItemFragment fragment = new ListItemFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mItemViewModel = getArguments().getParcelable(ITEM_VM_KEY);
+    }
 
     @Nullable
     @Override
@@ -47,14 +65,14 @@ public class ListItemFragment<T, U extends IItemAdapter<T>> extends Fragment {
 
         mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mAdapter = new StarshipsAdapter(this::loadNext);
+        mAdapter = new IItemAdapter<>(this::loadNext);
         mAdapter.getItemClicks().subscribe(this::openDetails);
         mListView.setAdapter(mAdapter);
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    private SwapiService getService() {
+    public static SwapiService getService() {
         if (mService == null) {
             mService = ApiClient.getClient().create(SwapiService.class);
         }
@@ -99,10 +117,10 @@ public class ListItemFragment<T, U extends IItemAdapter<T>> extends Fragment {
 
         TextView finalLoadNextTextView = loadNextTextView;
         ProgressBar finalLoadNextProgressBar = loadNextProgressBar;
-        getService().listStarships(page).enqueue(new Callback<ApiResult<T>>() {
+        mItemViewModel.getService(page).enqueue(new Callback<ApiResult<? extends SwapiModel>>() {
             @Override
-            public void onResponse(Call<ApiResult<T>> call, Response<ApiResult<T>> response) {
-                ApiResult<T> bodyResponse = response.body();
+            public void onResponse(Call<ApiResult<? extends SwapiModel>> call, Response<ApiResult<? extends SwapiModel>> response) {
+                ApiResult<? extends U> bodyResponse = (ApiResult<? extends U>) response.body();
                 nextPage = bodyResponse.getNext();
                 mAdapter.addItems(bodyResponse.getResults());
                 if (nextPage == null) mAdapter.setHasNextPage(false);
@@ -117,10 +135,9 @@ public class ListItemFragment<T, U extends IItemAdapter<T>> extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApiResult<T>> call, Throwable t) {
+            public void onFailure(Call<ApiResult<? extends SwapiModel>> call, Throwable t) {
                 Toast.makeText(getActivity(), R.string.loading_error, Toast.LENGTH_LONG).show();
                 mProgressBar.setVisibility(View.GONE);
-                t.printStackTrace();
             }
         });
     }

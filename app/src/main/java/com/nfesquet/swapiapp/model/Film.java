@@ -1,5 +1,5 @@
 package com.nfesquet.swapiapp.model;
 
 
-public class Film {
+public class Film implements SwapiModel {
 }

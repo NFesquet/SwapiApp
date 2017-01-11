@@ -2,7 +2,7 @@ package com.nfesquet.swapiapp.model;
 
 import java.util.List;
 
-public class People {
+public class People implements SwapiModel {
 
     private String name;
     private String height;

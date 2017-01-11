@@ -13,7 +13,7 @@ import com.nfesquet.swapiapp.model.Starship;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StarshipsAdapter extends IItemAdapter<Starship> {
+public class StarshipsAdapter {/*extends IItemAdapter<Starship> {
 
     private static final int ITEM_TYPE = 0;
     private static final int BUTTON_TYPE = 1;
@@ -76,5 +76,5 @@ public class StarshipsAdapter extends IItemAdapter<Starship> {
                 loadNext = itemView.findViewById(R.id.btn_load_next_root);
             }
         }
-    }
+    }*/
 }
